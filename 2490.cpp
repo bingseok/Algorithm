@@ -1,18 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-string s = "DCBAE";
 
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
-
+  
   for (int i = 0; i < 3; i++) {
-    int res = 0;
+    int cnt = 0;
     for (int j = 0; j < 4; j++) {
       int t;
       cin >> t;
-      res += t;
+      if (t == 1) cnt++;
     }
-    cout << s[res] << '\n';
+    if (cnt == 4) cout << 'E';
+    else if (cnt == 3) cout << 'A';
+    else if (cnt == 2) cout << 'B';
+    else if (cnt == 1) cout << 'C';
+    else if (cnt == 0) cout << 'D';
   }
 }

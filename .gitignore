@@ -9,6 +9,8 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+.gitignore
+
 # Local History for Visual Studio Code
 .history/
 
