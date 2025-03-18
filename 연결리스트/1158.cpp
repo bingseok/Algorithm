@@ -45,7 +45,7 @@ int main() {
       cursor = nxt[cursor];
     }
 
-    cout << dat[cursor];
+    cout << dat[cursor] << ", ";
     erase(cursor);
     if (n != 0) cout << ", ";
   }

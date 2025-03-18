@@ -18,6 +18,7 @@ int main() {
   cin >> x;
 
   for (int i = 0; i < n; i++) {
+    if (arr[i] >= x) continue;
     if (freq[x-arr[i]]) cnt++;
   }
 

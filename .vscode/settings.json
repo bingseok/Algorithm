@@ -8,6 +8,7 @@
     "xhash": "cpp",
     "xtree": "cpp",
     "iostream": "cpp",
-    "xutility": "cpp"
-  }
+    "xutility": "cpp",
+    "stack": "cpp"
+  },
 }

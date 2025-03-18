@@ -21,8 +21,8 @@ int main() {
         for (int k = 0; k < 9; k++) {
           if (k == i || k == j) continue;
           cout << arr[k] << '\n';
-          return 0;
         }          
+        return 0;
       }
     }
   }

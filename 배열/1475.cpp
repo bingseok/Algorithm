@@ -14,7 +14,7 @@ int main() {
     n/=10;
   }
 
-  freq[6] = 0;
   freq[9] = (freq[6] + freq[9] + 1) / 2;
+  freq[6] = 0;
   cout << *max_element(freq, freq + 10);
 }
