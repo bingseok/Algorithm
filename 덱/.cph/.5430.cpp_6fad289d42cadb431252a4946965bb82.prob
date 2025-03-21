@@ -1,0 +1,1 @@
+{"name":"Local: 5430","url":"d:\\Users\\82107\\Desktop\\코딩테스트\\덱\\5430.cpp","tests":[{"id":1742534196427,"input":"4\nRDD\n4\n[1,2,3,4]\nDD\n1\n[42]\nRRD\n6\n[1,1,2,3,5,8]\nD\n0\n[]","output":"[2,1]\nerror\n[1,2,3,5,8]\nerror"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Users\\82107\\Desktop\\코딩테스트\\덱\\5430.cpp","group":"local","local":true}

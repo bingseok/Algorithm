@@ -27,5 +27,3 @@ int main() {
 
   cout << ans;
 }
-
-3 4
