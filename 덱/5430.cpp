@@ -1,27 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int t, n, rev = 1, err = -1; // rev가 -1이면 역방향, 1이면 정방향
-string p, input;
+int t, n;
+string p, arr;
 deque<int> dq;
 
-void add_deque(string input, int n) {
-  if (input.size() == 2) return;
-  for (int i = 1; i < input.size(); i++) {
-    int res = 0;
-    while (input[i] != ',' && input[i] != ']') {
-      res += res * 10 + (input[i] - '0');
-      i++;
+void parse_arr(string arr, int n) {
+  int cur = 0;
+  for (int i = 1; i + 1 < arr.size(); i++) {
+    if (arr[i] != ',')
+      cur = cur * 10 + (arr[i] - '0');
+    else {
+      dq.push_back(cur);
+      cur = 0;
     }
-    dq.push_back(res);
   }
+  if (cur != 0) dq.push_back(cur);
 }
 
-void print_deque() {
+void print_arr(deque<int> dq) {
   cout << '[';
   for (int i = 0; i < dq.size(); i++) {
     cout << dq[i];
-    if (i != dq.size() - 1) cout << ',';
+    if (i + 1 != dq.size()) cout << ",";
   }
   cout << "]\n";
 }
@@ -32,28 +33,28 @@ int main() {
 
   cin >> t;
   while (t--) {
+    bool rev = false; // 뒤집으면 true
+    bool err = false; // empty일 때 pop
     cin >> p;
     cin >> n;
-    cin >> input;
-    add_deque(input, n);
+    cin >> arr;
+    parse_arr(arr, n);
     for (auto c : p) {
-      if (c == 'R') rev *= -1;
-      if (c == 'D') {
+      if (c == 'R') rev = !rev;
+      else if (c == 'D') {
         if (dq.empty()) {
-          err = 1;
+          err = true;
           break;
         }
-        if (rev == -1) {
-          dq.pop_back();
-        } else dq.pop_front();        
+        if (rev) dq.pop_back();
+        else dq.pop_front();
       }
     }
-    if (err == 1) cout << "error\n";
+    if (err) cout << "error\n";
     else {
-      if(rev == -1) reverse(dq.begin(), dq.end());
-      print_deque();
+      if (rev) reverse(dq.begin(), dq.end());
+      print_arr(dq);
     }
-    rev = 1; err = -1;
     dq.clear();
   }
 }
