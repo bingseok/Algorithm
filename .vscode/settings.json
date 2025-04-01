@@ -9,6 +9,8 @@
     "xtree": "cpp",
     "iostream": "cpp",
     "xutility": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "queue": "cpp",
+    "xiosbase": "cpp"
   },
 }

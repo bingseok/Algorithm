@@ -1,0 +1,1 @@
+{"name":"Local: 1926","url":"d:\\Users\\82107\\Desktop\\코딩테스트\\BFS\\1926.cpp","tests":[{"id":1743504748836,"input":"6 5\n1 1 0 1 1\n0 1 1 0 0\n0 0 0 0 0\n1 0 1 1 1\n0 0 1 1 1\n0 0 1 1 1","output":"4\n9"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Users\\82107\\Desktop\\코딩테스트\\BFS\\1926.cpp","group":"local","local":true}
