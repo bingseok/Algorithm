@@ -2,75 +2,70 @@
 using namespace std;
 #define X first
 #define Y second
+int r, c;
+string board[1002];
+int dist1[1002][1002]; // 불의 이동거리
+int dist2[1002][1002]; // 지훈이의 이동거리
+queue<pair<int, int>> Q1; // 불의 큐
+queue<pair<int, int>> Q2; // 지훈이의 큐
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-queue<pair<int, int>> q1;
-queue<pair<int, int>> q2;
-string board[1001];
-int dist1[1001][1001]; // 불의 이동 거리
-int dist2[1001][1001]; // 지훈이의 이동거리
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
 
-  int r, c;
   cin >> r >> c;
-
   for (int i = 0; i < r; i++) {
-    cin >> board[i];
     fill(dist1[i], dist1[i] + c, -1);
     fill(dist2[i], dist2[i] + c, -1);
   }
 
+  for (int i = 0; i < r; i++)
+    cin >> board[i];
+  
   for (int i = 0; i < r; i++) {
     for (int j = 0; j < c; j++) {
       if (board[i][j] == 'F') {
+        Q1.push({i, j});
         dist1[i][j] = 0;
-        q1.push({i, j});
-      }   
-      else if (board[i][j] == 'J') {
+      }
+      if (board[i][j] == 'J') {
+        Q2.push({i, j});
         dist2[i][j] = 0;
-        q2.push({i, j});
-      }   
+      }
     }
   }
 
   // 불의 BFS
-  while (!q1.empty()) {
-    auto cur = q1.front(); q1.pop();
+  while (!Q1.empty()) {
+    auto cur = Q1.front(); Q1.pop();
     for (int dir = 0; dir < 4; dir++) {
-      int x = cur.X + dx[dir];
-      int y = cur.Y + dy[dir];
-      if (x < 0 || x >= r || y < 0 || y >= c) continue;
-      if (board[x][y] == '#' || dist1[x][y] >= 0) continue;
-      dist1[x][y] = dist1[cur.X][cur.Y] + 1;
-      q1.push({x, y});
+      int nx = cur.X + dx[dir];
+      int ny = cur.Y + dy[dir];
+      if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
+      if (board[nx][ny] == '#' || dist1[nx][ny] != -1) continue;
+      Q1.push({nx, ny});
+      dist1[nx][ny] = dist1[cur.X][cur.Y] + 1;
     }
   }
-
 
   // 지훈이의 BFS
-  while (!q2.empty()) {
-    auto cur = q2.front(); q2.pop();
+  while (!Q2.empty()) {
+    auto cur = Q2.front(); Q2.pop();
     for (int dir = 0; dir < 4; dir++) {
-      int x = cur.X + dx[dir];
-      int y = cur.Y + dy[dir];
-      if (x < 0 || x >= r || y < 0 || y >= c) continue;
-      if (board[x][y] == '#' || dist2[x][y] >= 0) continue;
-      dist2[x][y] = dist2[cur.X][cur.Y] + 1;
-      if (dist1[x][y] <= dist2[x][y]) dist2[x][y] = -1;
-      else q2.push({x, y});
+      int nx = cur.X + dx[dir];
+      int ny = cur.Y + dy[dir];
+      if (nx < 0 || nx >= r || ny < 0 || ny >= c) {
+        cout << dist2[cur.X][cur.Y] + 1;
+        return 0;
+      }
+      if (board[nx][ny] == '#') continue;
+      if (dist2[nx][ny] != -1 || dist1[nx][ny] != -1 && dist1[nx][ny] <= dist2[cur.X][cur.Y] + 1) continue;
+      Q2.push({nx, ny});
+      dist2[nx][ny] = dist2[cur.X][cur.Y] + 1;
     }
   }
 
-  int ans = -1 ;
-  for (int i = 0; i < r; i++) {
-    for (int j = 0; j < c; j++) {
-      if (board[i][j] == '#') continue;
-      ans = max(ans, dist2[i][j]);
-    }
-  }
-
-  cout << ans + 1;
+  cout << "IMPOSSIBLE";
 }

@@ -4,23 +4,23 @@ using namespace std;
 #define Y second
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
+int n, m;
 string board[102];
 int dist[102][102];
-int n, m;
 
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
 
   cin >> n >> m;
-  for (int i = 0; i < n; i++) {
-    cin >> board[i];
-    fill(dist[i], dist[i] + m, -1);
-  }
+  for (int i = 0; i < n; i++) cin >> board[i];
+
+  for (int i = 0; i < n; i++) fill(dist[i], dist[i] + m, -1);
 
   queue<pair<int, int>> Q;
   Q.push({0, 0});
   dist[0][0] = 0;
+
   while (!Q.empty()) {
     auto cur = Q.front(); Q.pop();
     for (int dir = 0; dir < 4; dir++) {
